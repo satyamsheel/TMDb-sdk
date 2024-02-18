@@ -12,7 +12,7 @@ object ApiClient {
     private val authInterceptor = Interceptor {chain->
         val newUrl = chain.request().url
             .newBuilder()
-            .addQueryParameter("api_key", "909594533c98883408adef5d56143539"/*TMDbKey.instance.getConfiguration().getApiKey()*/)
+            .addQueryParameter("api_key", TMDbKey.instance.getConfiguration().getApiKey())
             .build()
 
         val newRequest = chain.request()
