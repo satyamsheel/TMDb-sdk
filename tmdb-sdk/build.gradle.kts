@@ -32,6 +32,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 
@@ -53,7 +60,19 @@ dependencies {
     testImplementation ("com.squareup.okhttp3:mockwebserver:4.10.0")
     testImplementation ("com.google.truth:truth:1.1.3")
 }
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.satyamsheel"
+            artifactId = "tmbd-sdk"
+            version = "1.0.7"
 
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
 
 
 
